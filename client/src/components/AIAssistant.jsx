@@ -25,7 +25,7 @@ function AIAssistant() {
         setLoading(true);
 
         try {
-            const res = await fetch('http://localhost:5000/api/ai/chat', {
+            const res = await fetch('https://farmer-helper-flame.vercel.app/api/ai/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: input, language })
@@ -60,8 +60,8 @@ function AIAssistant() {
                 {messages.map((msg, idx) => (
                     <div key={idx} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`max-w-[80%] p-3 rounded-2xl ${msg.sender === 'user'
-                                ? 'bg-green-600 text-white rounded-tr-none'
-                                : 'bg-white border border-gray-200 text-gray-800 rounded-tl-none shadow-sm'
+                            ? 'bg-green-600 text-white rounded-tr-none'
+                            : 'bg-white border border-gray-200 text-gray-800 rounded-tl-none shadow-sm'
                             }`}>
                             {msg.text}
                         </div>

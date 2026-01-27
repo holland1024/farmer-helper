@@ -19,7 +19,7 @@ function EnrollmentForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const dbUrl = 'http://localhost:5000/api/farmers';
+            const dbUrl = 'https://farmer-helper-flame.vercel.app/api/farmers';
             // Fallback for demo if backend not fully ready or blocked
 
             const res = await fetch(dbUrl, {

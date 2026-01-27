@@ -5,7 +5,7 @@ function FarmerList() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/farmers')
+        fetch('https://farmer-helper-flame.vercel.app/api/farmers')
             .then(res => res.json())
             .then(data => {
                 setFarmers(data);

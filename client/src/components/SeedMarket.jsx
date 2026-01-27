@@ -11,7 +11,7 @@ function SeedMarket() {
     }, []);
 
     const fetchSeeds = () => {
-        fetch('http://localhost:5000/api/seeds')
+        fetch('https://farmer-helper-flame.vercel.app/api/seeds')
             .then(res => res.json())
             .then(data => {
                 setSeeds(data);
@@ -37,7 +37,7 @@ function SeedMarket() {
         };
 
         try {
-            const res = await fetch('http://localhost:5000/api/buy-requests', {
+            const res = await fetch('https://farmer-helper-flame.vercel.app/api/buy-requests', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData)

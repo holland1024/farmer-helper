@@ -7,7 +7,7 @@ function FertilizerMarket() {
     const [buyForm, setBuyForm] = useState({ farmerName: '', mobile: '', quantity: '' });
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/fertilizers')
+        fetch('https://farmer-helper-flame.vercel.app/api/fertilizers')
             .then(res => res.json())
             .then(data => {
                 setFertilizers(data);
@@ -33,7 +33,7 @@ function FertilizerMarket() {
         };
 
         try {
-            const res = await fetch('http://localhost:5000/api/buy-requests', {
+            const res = await fetch('https://farmer-helper-flame.vercel.app/api/buy-requests', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData)
