@@ -12,20 +12,42 @@ console.log("Startup Check - Gemini Key:", process.env.GEMINI_API_KEY ? "Loaded 
 app.use(cors());
 app.use(express.json());
 
-// Database Connection
-// Database Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected successfully'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// Database Connection (Serverless Optimized)
+let cachedConnection = null;
 
-mongoose.connection.on('error', err => {
-  console.error('MongoDB Runtime Error:', err);
-});
-mongoose.connection.on('disconnected', () => {
-  console.log('MongoDB Disconnected');
-});
-mongoose.connection.on('reconnected', () => {
-  console.log('MongoDB Reconnected');
+const connectDB = async () => {
+  if (cachedConnection) {
+    return cachedConnection;
+  }
+
+  if (!process.env.MONGODB_URI) {
+    throw new Error("MONGODB_URI is missing in Environment Variables!");
+  }
+
+  try {
+    cachedConnection = await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000 // Fail fast if no connection
+    });
+    console.log("MongoDB Connected (New Connection)");
+    return cachedConnection;
+  } catch (err) {
+    console.error("MongoDB Connection Failed:", err);
+    throw err;
+  }
+};
+
+// Middleware to ensure DB is connected
+app.use(async (req, res, next) => {
+  // Skip DB connection for simple health check
+  if (req.path === '/') return next();
+
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error("Database Error on Request:", err);
+    res.status(500).json({ error: "Database Connection Failed", details: err.message });
+  }
 });
 
 const Farmer = require('./models/Farmer');
