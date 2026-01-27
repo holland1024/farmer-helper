@@ -20,15 +20,18 @@ const connectDB = async () => {
     return cachedConnection;
   }
 
-  if (!process.env.MONGODB_URI) {
-    throw new Error("MONGODB_URI is missing in Environment Variables!");
+  // Hardcoded Connection (As requested by User for quick deployment)
+  const URI = "mongodb://atlas-sql-6973080e4cca4d807005ce31-g5wswf.a.query.mongodb.net/farmer-app?ssl=true&authSource=admin";
+
+  if (!URI) {
+    throw new Error("MONGODB_URI is missing!");
   }
 
   try {
-    cachedConnection = await mongoose.connect(process.env.MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000 // Fail fast if no connection
+    cachedConnection = await mongoose.connect(URI, {
+      serverSelectionTimeoutMS: 5000
     });
-    console.log("MongoDB Connected (New Connection)");
+    console.log("MongoDB Connected (Hardcoded)");
     return cachedConnection;
   } catch (err) {
     console.error("MongoDB Connection Failed:", err);
