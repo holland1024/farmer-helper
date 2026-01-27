@@ -20,8 +20,8 @@ const connectDB = async () => {
     return cachedConnection;
   }
 
-  // Hardcoded Connection (As requested by User for quick deployment)
-  const URI = "mongodb://atlas-sql-6973080e4cca4d807005ce31-g5wswf.a.query.mongodb.net/farmer-app?ssl=true&authSource=admin";
+  // Hardcoded Connection (Standard String)
+  const URI = "mongodb+srv://pragadeeshwaran1024_db_user:Pragadeesh1024%23@cluster0.ufwtjbi.mongodb.net/farmer-app?retryWrites=true&w=majority";
 
   if (!URI) {
     throw new Error("MONGODB_URI is missing!");
