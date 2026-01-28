@@ -32,8 +32,8 @@ function EnrollmentForm() {
 
             navigate('/farmers'); // Go to list view
         } catch (err) {
-            console.error(err);
-            setError('Error submitting form. Ensure server is running.');
+            console.error("Enrollment Error:", err);
+            setError(`Error: ${err.message || 'Server not reachable'}`);
         }
     };
 
