@@ -26,8 +26,8 @@ function StaffLogin({ setIsAuthenticated }) {
             <div className="bg-white p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-md border-t-8 border-green-700">
                 <div className="text-center mb-8">
                     <span className="text-5xl block mb-4">🏛️</span>
-                    <h2 className="text-2xl font-bold text-gray-800">Government Staff Login</h2>
-                    <p className="text-gray-500 text-sm mt-2">Restricted Access Portal</p>
+                    <h2 className="text-2xl font-bold text-gray-800">Official Staff Portal</h2>
+                    <p className="text-gray-500 text-sm mt-2">Restricted Access • v1.2</p>
                 </div>
 
                 {error && (
