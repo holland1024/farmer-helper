@@ -215,7 +215,7 @@ app.post('/api/ai/chat', async (req, res) => {
         const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(message)}`;
         reply = language === 'ta'
             ? `மன்னிக்கவும், எனக்கு அது பற்றி தெரியவில்லை. \n\n💡 *வேளாண் துணுக்கு:* ${randomFact} \n\nகூகுளில் தேட இங்கே கிளிக் செய்யவும்: [Google Search](${googleSearchUrl})`
-                `I'm not sure about that. \n\n💡 *Farming Fact:* ${randomFact} \n\nTry searching on Google: [Click Here](${googleSearchUrl})`;
+            : `I'm not sure about that. \n\n💡 *Farming Fact:* ${randomFact} \n\nTry searching on Google: [Click Here](${googleSearchUrl})`;
     }
 
     return res.json({ reply });
