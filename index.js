@@ -9,6 +9,11 @@ console.log("Startup Check - OpenAI Key:", process.env.OPENAI_API_KEY ? "Loaded"
 console.log("Startup Check - Gemini Key:", process.env.GEMINI_API_KEY ? "Loaded (" + process.env.GEMINI_API_KEY.substring(0, 5) + "...)" : "Not Found");
 
 // Middleware
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); // Allow all origins
     res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
