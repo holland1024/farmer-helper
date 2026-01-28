@@ -9,12 +9,18 @@ console.log("Startup Check - OpenAI Key:", process.env.OPENAI_API_KEY ? "Loaded"
 console.log("Startup Check - Gemini Key:", process.env.GEMINI_API_KEY ? "Loaded (" + process.env.GEMINI_API_KEY.substring(0, 5) + "...)" : "Not Found");
 
 // Middleware
-app.use(cors({
-  origin: '*', // Allow all origins (Simplest fix for GitHub Pages)
-  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-app.options(/(.*)/, cors()); // Enable preflight for all routes (Express 5 regex)
+// Middleware
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); // Allow all origins
+  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  // Handle Preflight immediately
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  next();
+});
 app.use(express.json());
 
 // Database Connection (Serverless Optimized)
