@@ -23,9 +23,9 @@ function ComplaintPage() {
                 setStatus(null);
             }
         } catch (error) {
-            console.error("Error:", error);
+            console.error("Full Error Details:", error);
             setStatus(null);
-            alert("Network error.");
+            alert(`Network error: ${error.message}`);
         }
     };
 
