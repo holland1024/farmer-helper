@@ -9,7 +9,11 @@ console.log("Startup Check - OpenAI Key:", process.env.OPENAI_API_KEY ? "Loaded"
 console.log("Startup Check - Gemini Key:", process.env.GEMINI_API_KEY ? "Loaded (" + process.env.GEMINI_API_KEY.substring(0, 5) + "...)" : "Not Found");
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*', // Allow all origins (Simplest fix for GitHub Pages)
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // Database Connection (Serverless Optimized)
