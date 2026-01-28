@@ -22,8 +22,8 @@ function StaffLogin({ setIsAuthenticated }) {
     };
 
     return (
-        <div className="min-h-[80vh] flex items-center justify-center">
-            <div className="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-md border-t-8 border-green-700">
+        <div className="min-h-[80vh] flex items-center justify-center p-4">
+            <div className="bg-white p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-md border-t-8 border-green-700">
                 <div className="text-center mb-8">
                     <span className="text-5xl block mb-4">🏛️</span>
                     <h2 className="text-2xl font-bold text-gray-800">Government Staff Login</h2>
