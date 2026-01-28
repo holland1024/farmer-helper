@@ -29,12 +29,20 @@ function EnrollmentForm() {
                 body: JSON.stringify(formData)
             });
 
-            if (!res.ok) throw new Error('Failed to enroll');
+            if (!res.ok) {
+                const errorData = await res.json().catch(() => ({}));
+                throw new Error(errorData.details || errorData.error || 'Failed to enroll');
+            }
 
             navigate('/farmers'); // Go to list view
         } catch (err) {
             console.error("Enrollment Error:", err);
-            setError(`Error: ${err.message || 'Server not reachable'}`);
+            // Check for specific DB IP error
+            if (err.message && err.message.includes("whitelist")) {
+                setError("Critical: Database blocked this connection. Please allow IP 0.0.0.0/0 in MongoDB Atlas.");
+            } else {
+                setError(`Error: ${err.message || 'Server not reachable'}`);
+            }
         }
     };
 
