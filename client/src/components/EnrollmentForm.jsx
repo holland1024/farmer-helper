@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../config';
 
 function EnrollmentForm() {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ function EnrollmentForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const dbUrl = 'https://farmer-helper-flame.vercel.app/api/farmers';
+            const dbUrl = `${API_BASE_URL}/api/farmers`;
             // Fallback for demo if backend not fully ready or blocked
 
             const res = await fetch(dbUrl, {

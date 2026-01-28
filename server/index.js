@@ -14,6 +14,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.options(/(.*)/, cors()); // Enable preflight for all routes (Express 5 regex)
 app.use(express.json());
 
 // Database Connection (Serverless Optimized)

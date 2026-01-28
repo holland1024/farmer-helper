@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import API_BASE_URL from '../config';
 
 function FarmerSalesPage() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -8,7 +9,7 @@ function FarmerSalesPage() {
     const onSubmit = async (data) => {
         console.log("Farmer Sale Data:", data);
         try {
-            const response = await fetch('https://farmer-helper-flame.vercel.app/api/sales', {
+            const response = await fetch(`${API_BASE_URL}/api/sales`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)

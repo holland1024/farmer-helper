@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import API_BASE_URL from '../config';
 
 function FarmerList() {
     const [farmers, setFarmers] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('https://farmer-helper-flame.vercel.app/api/farmers')
+        fetch(`${API_BASE_URL}/api/farmers`)
             .then(res => res.json())
             .then(data => {
                 setFarmers(data);

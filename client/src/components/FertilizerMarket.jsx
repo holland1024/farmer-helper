@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE_URL from '../config';
 
 function FertilizerMarket() {
     const [fertilizers, setFertilizers] = useState([]);
@@ -7,7 +8,7 @@ function FertilizerMarket() {
     const [buyForm, setBuyForm] = useState({ farmerName: '', mobile: '', quantity: '' });
 
     useEffect(() => {
-        fetch('https://farmer-helper-flame.vercel.app/api/fertilizers')
+        fetch(`${API_BASE_URL}/api/fertilizers`)
             .then(res => res.json())
             .then(data => {
                 setFertilizers(data);
@@ -33,7 +34,7 @@ function FertilizerMarket() {
         };
 
         try {
-            const res = await fetch('https://farmer-helper-flame.vercel.app/api/buy-requests', {
+            const res = await fetch(`${API_BASE_URL}/api/buy-requests`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData)

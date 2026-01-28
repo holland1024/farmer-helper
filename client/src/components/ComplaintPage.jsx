@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import API_BASE_URL from '../config';
 
 function ComplaintPage() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -8,7 +9,7 @@ function ComplaintPage() {
     const onSubmit = async (data) => {
         setStatus('loading');
         try {
-            const response = await fetch('https://farmer-helper-flame.vercel.app/api/complaints', {
+            const response = await fetch(`${API_BASE_URL}/api/complaints`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -25,7 +26,11 @@ function ComplaintPage() {
         } catch (error) {
             console.error("Full Error Details:", error);
             setStatus(null);
-            alert(`Network error: ${error.message}`);
+            if (error.message === 'Failed to fetch' || error.message === 'Network request failed') {
+                alert("Network Error: Unable to connect to server. Please check your internet or try again later. (CORS/Server Down)");
+            } else {
+                alert(`Error: ${error.message}`);
+            }
         }
     };
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE_URL from '../config';
 
 function AdminPanel() {
     const [activeTab, setActiveTab] = useState('seeds'); // 'seeds', 'fertilizers', 'sales', 'requests', 'complaints'
@@ -24,11 +25,11 @@ function AdminPanel() {
     }, []);
 
     // API Calls
-    const fetchSeeds = () => fetch('https://farmer-helper-flame.vercel.app/api/seeds').then(res => res.json()).then(setSeeds);
-    const fetchFertilizers = () => fetch('https://farmer-helper-flame.vercel.app/api/fertilizers').then(res => res.json()).then(setFertilizers);
-    const fetchSales = () => fetch('https://farmer-helper-flame.vercel.app/api/sales').then(res => res.json()).then(setSales);
-    const fetchRequests = () => fetch('https://farmer-helper-flame.vercel.app/api/buy-requests').then(res => res.json()).then(setRequests);
-    const fetchComplaints = () => fetch('https://farmer-helper-flame.vercel.app/api/complaints').then(res => res.json()).then(setComplaints);
+    const fetchSeeds = () => fetch(`${API_BASE_URL}/api/seeds`).then(res => res.json()).then(setSeeds);
+    const fetchFertilizers = () => fetch(`${API_BASE_URL}/api/fertilizers`).then(res => res.json()).then(setFertilizers);
+    const fetchSales = () => fetch(`${API_BASE_URL}/api/sales`).then(res => res.json()).then(setSales);
+    const fetchRequests = () => fetch(`${API_BASE_URL}/api/buy-requests`).then(res => res.json()).then(setRequests);
+    const fetchComplaints = () => fetch(`${API_BASE_URL}/api/complaints`).then(res => res.json()).then(setComplaints);
 
     const handleSeedChange = (e) => {
         const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -42,7 +43,7 @@ function AdminPanel() {
 
     const submitSeed = async (e) => {
         e.preventDefault();
-        await fetch('https://farmer-helper-flame.vercel.app/api/seeds', {
+        await fetch(`${API_BASE_URL}/api/seeds`, {
             method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(seedForm)
         });
         setSeedForm({ name: '', description: '', imageUrl: '', price: '', availability: true });
@@ -52,7 +53,7 @@ function AdminPanel() {
 
     const submitFertilizer = async (e) => {
         e.preventDefault();
-        await fetch('https://farmer-helper-flame.vercel.app/api/fertilizers', {
+        await fetch(`${API_BASE_URL}/api/fertilizers`, {
             method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(fertForm)
         });
         setFertForm({ name: '', description: '', imageUrl: '', price: '', weight: '', availability: true });
@@ -62,7 +63,7 @@ function AdminPanel() {
 
     const toggleStatus = async (type, id, currentStatus) => {
         const endpoint = type === 'seed' ? `seeds/${id}` : `fertilizers/${id}`;
-        await fetch(`https://farmer-helper-flame.vercel.app/api/${endpoint}`, {
+        await fetch(`${API_BASE_URL}/api/${endpoint}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ availability: !currentStatus })

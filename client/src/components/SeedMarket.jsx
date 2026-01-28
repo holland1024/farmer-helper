@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE_URL from '../config';
 
 function SeedMarket() {
     const [seeds, setSeeds] = useState([]);
@@ -11,7 +12,7 @@ function SeedMarket() {
     }, []);
 
     const fetchSeeds = () => {
-        fetch('https://farmer-helper-flame.vercel.app/api/seeds')
+        fetch(`${API_BASE_URL}/api/seeds`)
             .then(res => res.json())
             .then(data => {
                 setSeeds(data);
@@ -37,7 +38,7 @@ function SeedMarket() {
         };
 
         try {
-            const res = await fetch('https://farmer-helper-flame.vercel.app/api/buy-requests', {
+            const res = await fetch(`${API_BASE_URL}/api/buy-requests`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData)

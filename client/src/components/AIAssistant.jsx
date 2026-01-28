@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import API_BASE_URL from '../config';
 
 function AIAssistant() {
     const [messages, setMessages] = useState([
@@ -25,7 +26,7 @@ function AIAssistant() {
         setLoading(true);
 
         try {
-            const res = await fetch('https://farmer-helper-flame.vercel.app/api/ai/chat', {
+            const res = await fetch(`${API_BASE_URL}/api/ai/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: input, language })
