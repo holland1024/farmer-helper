@@ -1,8 +1,0 @@
-client
-server
-node_modules
-.git
-temp_dist
-response_debug.html
-.env
-*.log
