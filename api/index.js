@@ -61,12 +61,12 @@ app.use(async (req, res, next) => {
     }
 });
 
-const Farmer = require('./models/Farmer');
-const Seed = require('./models/Seed');
-const Fertilizer = require('./models/Fertilizer');
-const SaleRequest = require('./models/SaleRequest');
-const Complaint = require('./models/Complaint');
-const BuyerRequest = require('./models/BuyerRequest');
+const Farmer = require('../models/Farmer');
+const Seed = require('../models/Seed');
+const Fertilizer = require('../models/Fertilizer');
+const SaleRequest = require('../models/SaleRequest');
+const Complaint = require('../models/Complaint');
+const BuyerRequest = require('../models/BuyerRequest');
 
 // -- Buyer Request Routes --
 app.post('/api/buy-requests', async (req, res) => {

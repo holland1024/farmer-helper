@@ -2,7 +2,7 @@
     "name": "farmer-helper-root",
     "version": "1.0.0",
     "scripts": {
-        "start": "node index.js",
+        "start": "node api/index.js",
         "build": "echo 'No build step for API'"
     },
     "dependencies": {
