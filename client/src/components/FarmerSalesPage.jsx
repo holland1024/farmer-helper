@@ -18,11 +18,12 @@ function FarmerSalesPage() {
             if (response.ok) {
                 setSubmitted(true);
             } else {
-                alert("Failed to submit. Please try again.");
+                const errData = await response.json().catch(() => ({}));
+                alert(`Failed to submit: ${errData.error || response.statusText}`);
             }
         } catch (error) {
             console.error("Error submitting sale:", error);
-            alert("Network error. Please try again.");
+            alert(`Network error: ${error.message} (Check internet or Vercel/DB status)`);
         }
     };
 
@@ -58,6 +59,7 @@ function FarmerSalesPage() {
                         <label className="block text-sm font-bold text-gray-700 mb-2">Farmer Name</label>
                         <input
                             {...register("name", { required: true })}
+                            autoComplete="name"
                             className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
                             placeholder="Your Name"
                         />
@@ -68,6 +70,7 @@ function FarmerSalesPage() {
                         <input
                             type="tel"
                             {...register("mobile", { required: true, pattern: /^[0-9]{10}$/ })}
+                            autoComplete="tel"
                             className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
                             placeholder="10-digit Mobile"
                         />
